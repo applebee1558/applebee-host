@@ -1,13 +1,43 @@
 {{yield}}
+{{#if this.error}}
+    {{polaris-banner text=this.error status="critical" icon="CircleAlertMajor"}}
+{{/if}}
 {{polaris-text-field
   label="Email"
   placeholder="admin@applebee1558.com"
-  value=email_addr
+  value=""
+  error=this.email_error
   onChange=(action "email_change")
 }}
+{{polaris-text-field
+  label="Username"
+  placeholder="Username Here"
+  value=""
+  onChange=(action "username_change")
+}}
+{{polaris-text-field
+  label="Password"
+  placeholder="Password Here"
+  value=""
+  error=this.password_error
+  type="password"
+  onChange=(action "password_change")
+}}
+{{polaris-text-field
+  label="Confirm Password"
+  placeholder="Re-Type Password Here"
+  value=""
+  error=this.confirm_password_error
+  type="password"
+  onChange=(action "confirm_password_change")
+}}
+{{polaris-text-field
+  label="Invite"
+  placeholder="Invite Code Here"
+  value=""
+  onChange=(action "invite_change")
+}}
+{{g-recaptcha-v2 siteKey='6Le0TzsbAAAAAO8s3f1kH9bu-aU1pedZYM8GK4ah' verified=(action 'setcaptcha')}}
 {{#polaris-button onClick=(action "register") loading=registerbutton_loading}}
   Register!
 {{/polaris-button}}
-{{#if this.error}}
-    {{polaris-banner text=this.error status="critical"}}
-{{/if}}
