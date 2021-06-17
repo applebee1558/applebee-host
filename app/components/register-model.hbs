@@ -1,0 +1,13 @@
+{{yield}}
+{{polaris-text-field
+  label="Email"
+  placeholder="admin@applebee1558.com"
+  value=email_addr
+  onChange=(action "email_change")
+}}
+{{#polaris-button onClick=(action "register") loading=registerbutton_loading}}
+  Register!
+{{/polaris-button}}
+{{#if this.error}}
+    {{polaris-banner text=this.error status="critical"}}
+{{/if}}
