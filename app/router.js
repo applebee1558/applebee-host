@@ -8,5 +8,5 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route('register');
-  this.route('verify-email');
+  this.route('verify-email/:verify_token');
 });
