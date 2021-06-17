@@ -1,2 +1,6 @@
 {{page-title "Email Verification"}}
-{{outlet}}
+{{#if @model.error}}
+    {{polaris-banner text=@model.message status="critical" icon="CircleAlertMajor"}}
+{{else}}
+    {{polaris-banner text="Successfully verified your email!" status="success" icon="CircleAlertMajor"}}
+{{/if}}
