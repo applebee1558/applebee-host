@@ -32,9 +32,9 @@ body {
 .menu {
     height: 4em;
     background: wheat;
-  }
-  
-  .menu h1 {
+}
+
+.menu h1 {
     position: relative;
     padding: 5px 0 0 8px;
     height: 100%;
@@ -47,18 +47,18 @@ body {
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
     /*font-style: italic;*/
-  }
-  
-  .menu a,
-  .menu .links {
+}
+
+.menu a,
+.menu .links {
     display: inline-block;
-  }
-  .menu .links a:hover {
+}
+.menu .links a:hover {
     opacity: 0.5;
-  }
-  
-  
-  .menu a {
+}
+
+
+.menu a {
     text-decoration: none;
     padding: 0 15px;
     color: #fff;
@@ -66,19 +66,19 @@ body {
     height: 90%;
     margin: auto;
     font-weight: bold;
-  }
-  
-  .menu a:hover,
-  .menu a.active {
+}
+
+.menu a:hover,
+.menu a.active {
     opacity: 1;
-  }
-  
-  .menu .links {
+}
+
+.menu .links {
     padding: 0 21px;
     height: 100%;
-  }
-  
-  .menu .links a {
+}
+
+.menu .links a {
     position: relative;
     bottom: 5px;
     height: 100%;
@@ -89,4 +89,4 @@ body {
     -webkit-text-fill-color: transparent; 
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
-  }
+}
