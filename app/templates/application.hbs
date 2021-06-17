@@ -1,4 +1,17 @@
 {{page-title "applebee.host"}}
+<nav class="menu">
+    <LinkTo @route="index" class="menu-index">
+        <h1>applebee.host</h1>
+    </LinkTo>
+    <div class="links">
+        <LinkTo @route="login" class="menu-login">
+            Login
+        </LinkTo>
+        <LinkTo @route="register" class="menu-register">
+            Register
+        </LinkTo>
+    </div>
+</nav>
 
 {{!-- The following component displays Ember's default welcome message. --}}
 {{!<WelcomePage />}}

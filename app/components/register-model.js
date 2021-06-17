@@ -12,9 +12,11 @@ export default class RegisterModel extends Component {
     confirm_password=""
     invite=""
     captcha=null
+    @tracked captcha_needed=false
     @tracked password_error=false
     @tracked confirm_password_error=false
     @tracked email_error=false
+    captcharun=false
     @action
     async register(){
         this.registerbutton_loading=true
@@ -28,8 +30,8 @@ export default class RegisterModel extends Component {
             this.registerbutton_loading=false
             return
         }
-        if(!this.captcha){
-            this.error="Please do the captcha before registering!"
+        if(!this.captcha & this.captcha_needed){
+            this.error="Please complete the captcha before registering!"
             this.registerbutton_loading=false
             return
         }
@@ -44,6 +46,13 @@ export default class RegisterModel extends Component {
             var r = await fetch(API_URL+"/register", {method: "POST", headers:{"content-type": "application/json"}, body: payload})
             var jsondata = await r.json()
             if(r.status!=201){
+                if(jsondata.code==151000){
+                    this.captcha_needed=true
+                    this.error="We need to verify that you are a human first!"
+                    //this.registerbutton_loading=false
+                    this.captcharun=true
+                    return
+                }
                 this.error=`${jsondata.message} | Code ${jsondata.code}`
             }else{
                 var token=jsondata.token
@@ -92,7 +101,10 @@ export default class RegisterModel extends Component {
     }
     @action
     setcaptcha(token){
-        console.log(token)
         this.captcha = token
+        if(this.captcharun){
+            this.captcharun=false
+            this.register()
+        }
     }
 }
