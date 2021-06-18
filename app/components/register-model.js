@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { API_URL } from './config';
+import { API_URL } from '../libs/config';
 
 export default class RegisterModel extends Component {
     @tracked registerbutton_loading=false
