@@ -1,8 +1,15 @@
 {{yield}}
 {{#polaris-card title="Email Verification" as |card|}}
-    {{#card.section}}
-        {{polaris-banner text=this.errormsg status="critical" icon="CircleAlertMajor"}}
-    {{/card.section}}
+    {{#if this.errormsg}}
+        {{#card.section}}
+            {{polaris-banner text=this.errormsg status="critical" icon="CircleAlertMajor"}}
+        {{/card.section}}
+    {{/if}}
+    {{#if this.successmsg}}
+        {{#card.section}}
+            {{polaris-banner text=this.successmsg status="success" icon="CircleAlertMajor"}}
+        {{/card.section}}
+    {{/if}}
     {{#card.section}}
         <p>An confirmation email was sent to {{@user.email}}. You can request another one or change your email.</p>
     {{/card.section}}
@@ -20,11 +27,11 @@
       onClose=(action "close_change_dialog")
       targetAttachment="center"
       translucentOverlay=true
-      animated=true
+      animatable=true
     }}
         {{#polaris-card title="Change Email" as |card|}}
             {{#card.section}}
-            <p>placeholder</p>
+            <p>Changing emails is not available yet! Please DM applebee#9292 with your account info to request a manual change!</p>
             {{/card.section}}
         {{/polaris-card}}
     {{/modal-dialog}}

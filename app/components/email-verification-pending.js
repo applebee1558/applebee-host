@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 export default class EmailVerificationPending extends Component {
     @tracked resend_loading=false;
     @tracked errormsg="You need to verify your email first before using applebee.host!"
+    @tracked successmsg=false
     @tracked change_email_dialog_open=false
     @action
     async resend_verification(){
@@ -16,6 +17,10 @@ export default class EmailVerificationPending extends Component {
                 json_data.message += ` Try again in ${json_data.retry_after} seconds`
             }
             this.errormsg = `${json_data.message} | Code ${json_data.code}`
+            this.successmsg = false
+        }else{
+            this.errormsg=false
+            this.successmsg = "Successfully re-sent your verification email!"
         }
         this.resend_loading=false
         console.log("sending")
