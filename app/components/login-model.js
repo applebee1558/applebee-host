@@ -1,12 +1,14 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { API_URL } from './config';
+import { API_URL } from '../libs/config';
+import { inject as service } from '@ember/service';
 
 export default class LoginModel extends Component {
     @tracked login_loading=false
     @tracked error=false
     @tracked captcha_needed=false
+    @service router
     username=""
     password=""
     captcha=null
@@ -39,6 +41,7 @@ export default class LoginModel extends Component {
             }else{
                 var token=jsondata.token
                 localStorage.setItem("api-token", token)
+                this.router.transitionTo('dashboard');
                 console.log("logged in!")
             }
         }catch(error){
@@ -63,4 +66,5 @@ export default class LoginModel extends Component {
             this.login()
         }
     }
+    
 }

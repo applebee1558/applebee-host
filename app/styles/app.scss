@@ -1,4 +1,6 @@
 @import "ember-polaris";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 .register_page_maincard{
     max-width: 500px;
     margin: auto;

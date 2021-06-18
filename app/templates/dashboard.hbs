@@ -1,2 +1,8 @@
 {{page-title "Dashboard"}}
+{{#if @model.verified}}
+    {{polaris-banner text=@model.username status="success" icon="CircleAlertMajor"}}
+{{else}}
+    <EmailVerificationPending @user={{@model}} />
+{{/if}}
+
 {{outlet}}

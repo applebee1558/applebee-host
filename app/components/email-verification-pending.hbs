@@ -1,0 +1,31 @@
+{{yield}}
+{{#polaris-card title="Email Verification" as |card|}}
+    {{#card.section}}
+        {{polaris-banner text=this.errormsg status="critical" icon="CircleAlertMajor"}}
+    {{/card.section}}
+    {{#card.section}}
+        <p>An confirmation email was sent to {{@user.email}}. You can request another one or change your email.</p>
+    {{/card.section}}
+    {{#card.section}}
+        {{#polaris-button onClick=(action "resend_verification") loading=this.resend_loading}}
+            Resend Verification Email
+        {{/polaris-button}}
+        {{#polaris-button onClick=(action "open_change_dialog")}}
+            Change Email
+        {{/polaris-button}}
+    {{/card.section}}
+{{/polaris-card}}
+{{#if this.change_email_dialog_open}}
+    {{#modal-dialog
+      onClose=(action "close_change_dialog")
+      targetAttachment="center"
+      translucentOverlay=true
+      animated=true
+    }}
+        {{#polaris-card title="Change Email" as |card|}}
+            {{#card.section}}
+            <p>placeholder</p>
+            {{/card.section}}
+        {{/polaris-card}}
+    {{/modal-dialog}}
+{{/if}}
