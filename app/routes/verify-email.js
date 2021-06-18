@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { API_URL } from '../components/config';
+import { API_URL } from '../libs/config';
 
 export default class VerifyEmailRoute extends Route {
     async model(params){
