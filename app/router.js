@@ -10,4 +10,5 @@ Router.map(function () {
   this.route('register');
   this.route('verify-email', {path: "/verify-email/:verify_token"});
   this.route('login');
+  this.route('dashboard');
 });
