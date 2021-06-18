@@ -23,7 +23,6 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
-    "@ember/jquery": "^2.0.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.2.5",
@@ -61,7 +60,6 @@
     "eslint-plugin-ember": "^10.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "liquid-fire": "^0.31.0",
     "liquid-tether": "^2.0.7",
     "loader.js": "^4.7.0",
     "npm-run-all": "^4.1.5",
