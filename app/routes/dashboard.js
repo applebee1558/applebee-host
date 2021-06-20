@@ -1,5 +1,7 @@
 import Route from '@ember/routing/route';
 import { make_request } from '../libs/api-handler';
+import ObjectProxy from '@ember/object/proxy';
+import PromiseProxyMixin from '@ember/object/promise-proxy-mixin';
 
 export default class DashboardRoute extends Route {
     async model(){
@@ -7,6 +9,8 @@ export default class DashboardRoute extends Route {
         if(status==401){
             return this.transitionTo('login');
         }
+        let ObjectPromiseProxy = ObjectProxy.extend(PromiseProxyMixin);
         return json_data
     }
+    
 }

@@ -1,0 +1,17 @@
+{{yield}}
+{{#if this.error}}
+    {{polaris-banner text=this.error status="critical" icon="CircleAlertMajor"}}
+{{/if}}
+{{polaris-text-field
+  label="Name"
+  placeholder="Enter a name for this config!"
+  value=""
+  error=this.name_error
+  onChange=(action "name_change")
+}}
+{{#polaris-button onClick=(action "make_config") loading=make_loading}}
+    Create Config!
+{{/polaris-button}}
+{{#each this.upload_tokens as |token|}}
+    <SharexConfigModal @metadata={{token}} />
+{{/each}}

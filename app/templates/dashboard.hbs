@@ -1,6 +1,7 @@
 {{page-title "Dashboard"}}
 {{#if @model.verified}}
     {{polaris-banner text=@model.username status="success" icon="CircleAlertMajor"}}
+    <SharexConfigHolderModal />
 {{else}}
     <EmailVerificationPending @user={{@model}} />
 {{/if}}
