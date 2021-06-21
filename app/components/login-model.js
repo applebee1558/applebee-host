@@ -18,6 +18,15 @@ export default class LoginModel extends Component {
     password=""
     captcha=null
     captcharun=false
+
+    constructor(params){
+        super(...arguments)
+        if (localStorage.getItem("api-token")!=null & localStorage.getItem("api-token")!='null'){
+            console.log("stop registering!")
+            this.router.transitionTo('dashboard');
+        }
+    }
+
     @action
     async login(){
         this.login_loading=true
