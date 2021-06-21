@@ -9,4 +9,8 @@ export default class HomePageComponent extends Component {
     goregister(){
         this.router.transitionTo('register');
     }
+    @action
+    godashboard(){
+        this.router.transitionTo('dashboard');
+    }
 }

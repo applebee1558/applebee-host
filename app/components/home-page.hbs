@@ -3,9 +3,16 @@
     <h4>Introduction</h4>
     <p>Introducing applebee.host, your premium image uploader.</p>
     <p>We offer vanity embeds and unlimited upload storage!</p>
-    <BsButton @type="primary" @onClick={{action "goregister"}}>
-        Register Now!
-    </BsButton>
+    {{#if @data.current_user}}
+        <BsButton @type="primary" @onClick={{action "godashboard"}}>
+            Go to Dashboard
+        </BsButton>
+    {{else}}
+        <BsButton @type="primary" @onClick={{action "goregister"}}>
+            Register Now!
+        </BsButton>
+    {{/if}}
+    
     <h4>Statistics</h4>
     <p>Total Users: {{@data.user_count}}</p>
     <p>Total Uploads: {{@data.upload_count}}</p>
