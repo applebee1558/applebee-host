@@ -8,5 +8,7 @@ export default class App extends Application {
   podModulePrefix = config.podModulePrefix;
   Resolver = Resolver;
 }
-
+if (!window.Promise) {
+  window.Promise = Ember.RSVP.Promise;
+}
 loadInitializers(App, config.modulePrefix);
