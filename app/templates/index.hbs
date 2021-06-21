@@ -1,2 +1,9 @@
-{{page-title "Index"}}
+{{page-title "Home"}}
+{{#if @model.message}}
+    <BsAlert @type="danger" @dismissible={{false}}>
+        <strong>ERROR: </strong>{{@model.message}}
+    </BsAlert>
+{{else}}
+    <HomePage @data={{@model}} />
+{{/if}}
 {{outlet}}
