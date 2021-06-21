@@ -22,8 +22,6 @@ const Validations = buildValidations({
     email: [validator('presence', true), validator('format', { type: 'email' })],
   });
 export default class RegisterModel extends Component {
-    showValidation=true
-    hasValidator=true
     @service router
     @tracked registerbutton_loading=false
     @tracked error=false
@@ -45,9 +43,6 @@ export default class RegisterModel extends Component {
             console.log("stop registering!")
             this.router.transitionTo('dashboard');
         }
-    }
-    validate(a,b,c){
-        console.log(a,b,c)
     }
     @action
     async register(){
