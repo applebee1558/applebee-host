@@ -2,16 +2,17 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-const nodeSass = require('node-sass');
 
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     // Add options here
+    
+
+    /*
     sassOptions: {
       implementation: nodeSass,
     },
-
     svgJar: {
       strategy: 'inline',
       inline: {
@@ -23,7 +24,7 @@ module.exports = function (defaults) {
           'public/assets/images/svg',
         ],
       }
-    },
+    },*/
 
     'ember-bootstrap': {
       bootstrapVersion: 4,

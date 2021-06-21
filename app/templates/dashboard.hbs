@@ -10,11 +10,7 @@
                 <SharexConfigHolderModal />
             </tab.pane>
             <tab.pane @title="Account Information">
-                <p>ID: {{@model.id}}</p>
-                <p>Vanity Embed Enabled: {{@model.vanity_embed}}</p>
-                <p>Username: {{@model.username}}</p>
-                <p>Email: {{@model.email}}</p>
-                <p>Registered On: {{@model.created_at}}</p>
+                <AccountSettings @model={{@model}} />
             </tab.pane>
         </BsTab>
         

@@ -10,6 +10,7 @@ export default class DashboardRoute extends Route {
             localStorage.setItem("api-token", null)
             return this.transitionTo('login');
         }
+        json_data.created_at_nice = new Date(json_data.created_at)
         let ObjectPromiseProxy = ObjectProxy.extend(PromiseProxyMixin);
         return json_data
     }
