@@ -1,5 +1,5 @@
 @import "ember-bootstrap/bootstrap";
-@import "ember-polaris";
+/*@import "ember-polaris";*/
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
 .register_page_maincard{
@@ -32,65 +32,7 @@ body {
     100%{background-position:0% 50%}
 }
 
-.menu {
-    height: 4em;
-    background: wheat;
+.dashboard-body, .register_page_maincard{
+    background-color: rgba(255,255,255,0.9);
+    padding: 20px;
 }
-
-.menu h1 {
-    position: relative;
-    padding: 5px 0 0 8px;
-    height: 100%;
-    font-size: 1.8em;
-    background: linear-gradient(194deg, #00f2fb, #d200fb);
-    background-size: 100%;
-    background-repeat: repeat;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    /*font-style: italic;*/
-}
-
-.menu a,
-.menu .links {
-    display: inline-block;
-}
-.menu .links a:hover {
-    opacity: 0.5;
-}
-
-
-.menu a {
-    text-decoration: none;
-    padding: 0 15px;
-    color: #fff;
-    font-size: 20px;
-    height: 90%;
-    margin: auto;
-    font-weight: bold;
-}
-
-.menu a:hover,
-.menu a.active {
-    opacity: 1;
-}
-
-.menu .links {
-    padding: 0 21px;
-    height: 100%;
-}
-
-.menu .links a {
-    position: relative;
-    bottom: 5px;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(50,255,0,1) 0%, rgba(0,239,255,1) 48%, rgba(0,212,255,1) 100%);
-    background-size: 100%;
-    background-repeat: repeat;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-}
-

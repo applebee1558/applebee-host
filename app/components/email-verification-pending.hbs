@@ -1,38 +1,37 @@
 {{yield}}
-{{#polaris-card title="Email Verification" as |card|}}
-    {{#if this.errormsg}}
-        {{#card.section}}
-            {{polaris-banner text=this.errormsg status="critical" icon="CircleAlertMajor"}}
-        {{/card.section}}
-    {{/if}}
-    {{#if this.successmsg}}
-        {{#card.section}}
-            {{polaris-banner text=this.successmsg status="success" icon="CircleAlertMajor"}}
-        {{/card.section}}
-    {{/if}}
-    {{#card.section}}
-        <p>An confirmation email was sent to {{@user.email}}. You can request another one or change your email.</p>
-    {{/card.section}}
-    {{#card.section}}
-        {{#polaris-button onClick=(action "resend_verification") loading=this.resend_loading}}
-            Resend Verification Email
-        {{/polaris-button}}
-        {{#polaris-button onClick=(action "open_change_dialog")}}
-            Change Email
-        {{/polaris-button}}
-    {{/card.section}}
-{{/polaris-card}}
-{{#if this.change_email_dialog_open}}
-    {{#modal-dialog
-      onClose=(action "close_change_dialog")
-      targetAttachment="center"
-      translucentOverlay=true
-      animatable=false
-    }}
-        {{#polaris-card title="Change Email" as |card|}}
-            {{#card.section}}
-            <p>Changing emails is not available yet! Please DM applebee#9292 with your account info to request a manual change!</p>
-            {{/card.section}}
-        {{/polaris-card}}
-    {{/modal-dialog}}
+<h4>Email Verification</h4>
+{{#if this.errormsg}}
+    <BsAlert
+        @visible={{true}}
+        @fade={{true}}
+        @type="danger"
+        @dismissible={{false}}
+    >
+        {{this.errormsg}}
+    </BsAlert>
 {{/if}}
+{{#if this.successmsg}}
+    <BsAlert
+        @visible={{true}}
+        @fade={{true}}
+        @type="success"
+        @dismissible={{false}}
+    >
+        {{this.successmsg}}
+    </BsAlert>
+{{/if}}
+<p>An confirmation email was sent to {{@user.email}}. You can request another one or change your email.</p>
+<BsButton @defaultText="Resend Verification Email" @pendingText="Sending Email..." @onClick={{action "resend_verification"}} @type="success"></BsButton>
+<BsButton @onClick={{action "open_change_dialog"}} @type="primary">Change Email</BsButton>
+
+<BsModal
+  @open={{this.change_email_dialog_open}}
+  @onHidden={{action (mut this.change_email_dialog_open) false}} as |modal|
+>
+    <modal.body>
+        <p>Changing emails is not available yet! Please DM applebee#9292 with your account info to request a manual change!</p>
+    </modal.body>
+    <modal.footer>
+        <BsButton @onClick={{action (mut this.change_email_dialog_open) false}}>Close</BsButton>
+    </modal.footer>
+</BsModal>

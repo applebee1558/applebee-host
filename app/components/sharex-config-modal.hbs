@@ -1,36 +1,23 @@
 {{yield}}
-{{polaris-callout-card
-  title=@metadata.name
-  text=this.get_desc 
-  primaryAction=(hash
-    text="Save ShareX Config"
-    onAction=(action "saveconfig")
-  )
-  secondaryAction=(hash
-    text="Delete ShareX Config"
-    onAction=(action "toggle_delete")
-  )
-}}
-{{#if this.delete_confirm_open}}
-    {{#modal-dialog
-      onClose=(action "toggle_delete")
-      targetAttachment="center"
-      translucentOverlay=true
-      animatable=false
-    }}
-        {{#polaris-card title="Delete Config" as |card|}}
-            {{#if this.delete_error}}
-                {{polaris-banner text=this.delete_error status="critical" icon="CircleAlertMajor"}}
-            {{/if}}
-            {{#if this.delete_success}}
-                {{polaris-banner text=this.delete_success status="success" icon="CircleAlertMajor"}}
-            {{/if}}
-            {{#card.section}}
-            <p>Are you sure you want to delete this config? THIS ACTION IS IRREVERSIBLE</p>
-            {{/card.section}}
-            {{#polaris-button onClick=(action "delete_config") loading=this.delete_loading}}
-                Confirm Delete
-            {{/polaris-button}}
-        {{/polaris-card}}
-    {{/modal-dialog}}
-{{/if}}
+{{this.get_desc}}
+<br />
+<BsButton @type="info" @onClick={{action "saveconfig"}}>Save ShareX Config</BsButton>
+<BsButton @type="danger" @onClick={{action "toggle_delete"}}>Delete ShareX Config</BsButton>
+<BsModal
+  @open={{this.delete_confirm_open}}
+  @onHidden={{action (mut this.delete_confirm_open) false}} as |modal|>
+  <modal.header>
+    <h4 class="modal-title">
+      Confirmation
+    </h4>
+  </modal.header>
+  <modal.body>
+    <label>
+      <p>Are you sure you want to delete this config? THIS ACTION IS IRREVERSIBLE</p>
+    </label>
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{action (mut this.delete_confirm_open) false}}>Cancel</BsButton>
+    <BsButton @onClick={{action "delete_config"}} @type="danger">Delete</BsButton>
+  </modal.footer>
+</BsModal>

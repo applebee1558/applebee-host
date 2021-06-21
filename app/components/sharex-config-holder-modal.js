@@ -9,9 +9,10 @@ export default class SharexConfigHolderModal extends Component {
     @tracked upload_tokens = []
     @tracked error = false
     @tracked make_loading = false
+    @tracked make_config_model_open=false
     constructor(params){
         super(...arguments)
-        this.load_list
+        this.load_list()
     }
     load_list = ()=>{
         runTask(this, async ()=>{
@@ -43,6 +44,7 @@ export default class SharexConfigHolderModal extends Component {
                 newarray.push(element)
             })
             this.upload_tokens=newarray
+            this.make_config_model_open = false
             //window.location.reload()
         }
         this.make_loading=false

@@ -1,9 +1,25 @@
 {{page-title "Dashboard"}}
-{{#if @model.verified}}
-    {{polaris-banner text=@model.username status="success" icon="CircleAlertMajor"}}
-    <SharexConfigHolderModal />
-{{else}}
-    <EmailVerificationPending @user={{@model}} />
-{{/if}}
-
+<div class="dashboard-body">
+    {{#if @model.verified}}
+        <BsAlert @type="success">
+            <strong>Welcome!</strong> You are currently logged in as {{@model.username}}
+        </BsAlert>
+        
+        <BsTab as |tab|>
+            <tab.pane @title="Share X Configs">
+                <SharexConfigHolderModal />
+            </tab.pane>
+            <tab.pane @title="Account Information">
+                <p>ID: {{@model.id}}</p>
+                <p>Vanity Embed Enabled: {{@model.vanity_embed}}</p>
+                <p>Username: {{@model.username}}</p>
+                <p>Email: {{@model.email}}</p>
+                <p>Registered On: {{@model.created_at}}</p>
+            </tab.pane>
+        </BsTab>
+        
+    {{else}}
+        <EmailVerificationPending @user={{@model}} />
+    {{/if}}
+</div>
 {{outlet}}

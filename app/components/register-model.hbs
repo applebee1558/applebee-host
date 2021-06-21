@@ -1,45 +1,38 @@
 {{yield}}
 {{#if this.error}}
-    {{polaris-banner text=this.error status="critical" icon="CircleAlertMajor"}}
+    <BsAlert
+      @visible={{true}}
+      @fade={{true}}
+      @type="danger"
+      @dismissible={{false}}
+    >{{this.error}}</BsAlert>
 {{/if}}
-{{polaris-text-field
-  label="Email"
-  placeholder="admin@applebee1558.com"
-  value=""
-  error=this.email_error
-  onChange=(action "email_change")
-}}
-{{polaris-text-field
-  label="Username"
-  placeholder="Username Here"
-  value=""
-  onChange=(action "username_change")
-}}
-{{polaris-text-field
-  label="Password"
-  placeholder="Password Here"
-  value=""
-  error=this.password_error
-  type="password"
-  onChange=(action "password_change")
-}}
-{{polaris-text-field
-  label="Confirm Password"
-  placeholder="Re-Type Password Here"
-  value=""
-  error=this.confirm_password_error
-  type="password"
-  onChange=(action "confirm_password_change")
-}}
-{{polaris-text-field
-  label="Invite"
-  placeholder="Invite Code Here"
-  value=""
-  onChange=(action "invite_change")
-}}
+
+<BsForm @model={{this}} @formLayout="vertical" @model={{this}} @onSubmit={{action "register"}} as |form|>
+  <form.element @controlType="Email" @label="Email" @property="email_addr" as |el|>
+    <el.control placeholder="Email" required>
+      {{#if this.email_error}}
+        <BsPopover @placement="left" title="Error">
+          {{this.email_error}}
+        </BsPopover>
+      {{/if}}
+    </el.control>
+  </form.element>
+  <form.element @controlType="text" @label="Username" @property="username" as |el|>
+    <el.control placeholder="Enter Username" required />
+  </form.element>
+  <form.element @controlType="password" @label="Password" @property="password" as |el|>
+      <el.control placeholder="Password" required />
+  </form.element>
+  <form.element @controlType="password" @label="Confirm Password" @property="confirm_password" as |el|>
+      <el.control placeholder="Enter Password Again" required />
+  </form.element>
+  <form.element @controlType="text" @label="Invite Code" @property="invite" as |el|>
+    <el.control placeholder="Invite Code" required />
+  </form.element>
+  <form.submitButton>Register</form.submitButton>
+</BsForm>
+
 {{#if this.captcha_needed}}
     {{g-recaptcha-v2 siteKey='6Le0TzsbAAAAAO8s3f1kH9bu-aU1pedZYM8GK4ah' verified=(action 'setcaptcha')}}
 {{/if}}
-{{#polaris-button onClick=(action "register") loading=registerbutton_loading}}
-  Register!
-{{/polaris-button}}

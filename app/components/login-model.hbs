@@ -1,24 +1,23 @@
 {{yield}}
 {{#if this.error}}
-    {{polaris-banner text=this.error status="critical" icon="CircleAlertMajor"}}
+    <BsAlert
+      @visible={{true}}
+      @fade={{true}}
+      @type="danger"
+      @dismissible={{false}}
+    >{{this.error}}</BsAlert>
 {{/if}}
-{{polaris-text-field
-  label="Username/Email"
-  placeholder="Username/Email"
-  value=""
-  onChange=(action "username_change")
-}}
 
-{{polaris-text-field
-  label="Password"
-  placeholder="Password Here"
-  value=""
-  type="password"
-  onChange=(action "password_change")
-}}
+<BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "login"}} as |form|>
+  <form.element @controlType="text" @label="Email/Username" @property="username" as |el|>
+    <el.control placeholder="Email/Username" required />
+    <form.element @controlType="password" @label="Password" @property="password" as |el|>
+      <el.control placeholder="Password" required />
+    </form.element>
+    <form.submitButton>Login</form.submitButton>
+  </form.element>
+</BsForm>
+
 {{#if this.captcha_needed}}
     {{g-recaptcha-v2 siteKey='6Le0TzsbAAAAAO8s3f1kH9bu-aU1pedZYM8GK4ah' verified=(action 'setcaptcha')}}
 {{/if}}
-{{#polaris-button onClick=(action "login") loading=login_loading}}
-  Login
-{{/polaris-button}}

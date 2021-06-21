@@ -1,6 +1,20 @@
 {{page-title "Email Verification"}}
 {{#if @model.error}}
-    {{polaris-banner text=@model.message status="critical" icon="CircleAlertMajor"}}
+    <BsAlert
+        @visible={{true}}
+        @fade={{true}}
+        @type="danger"
+        @dismissible={{false}}
+    >
+        {{@model.error}}
+    </BsAlert>
 {{else}}
-    {{polaris-banner text="Successfully verified your email!" status="success" icon="CircleAlertMajor"}}
+    <BsAlert
+        @visible={{true}}
+        @fade={{true}}
+        @type="success"
+        @dismissible={{false}}
+    >
+        Successfully verified your email!
+    </BsAlert>
 {{/if}}

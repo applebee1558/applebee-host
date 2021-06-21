@@ -3,8 +3,27 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { API_URL } from '../libs/config';
 import { inject as service } from '@ember/service';
-
+import { runTask, runDisposables } from 'ember-lifeline';
+import { refresh_token } from '../libs/api-handler';
+import { validator, buildValidations } from 'ember-cp-validations';
+const Validations = buildValidations({
+    password: [
+      validator('presence', true),
+      validator('length', {
+        min: 4,
+        max: 8,
+      }),
+      validator('length', {
+        isWarning: true,
+        min: 6,
+        message: 'Password is weak',
+      }),
+    ],
+    email: [validator('presence', true), validator('format', { type: 'email' })],
+  });
 export default class RegisterModel extends Component {
+    showValidation=true
+    hasValidator=true
     @service router
     @tracked registerbutton_loading=false
     @tracked error=false
@@ -19,6 +38,17 @@ export default class RegisterModel extends Component {
     @tracked confirm_password_error=false
     @tracked email_error=false
     captcharun=false
+
+    constructor(params){
+        super(...arguments)
+        if (localStorage.getItem("api-token")!=null & localStorage.getItem("api-token")!='null'){
+            console.log("stop registering!")
+            this.router.transitionTo('dashboard');
+        }
+    }
+    validate(a,b,c){
+        console.log(a,b,c)
+    }
     @action
     async register(){
         this.registerbutton_loading=true
@@ -51,14 +81,22 @@ export default class RegisterModel extends Component {
                 if(jsondata.code==151000){
                     this.captcha_needed=true
                     this.error="We need to verify that you are a human first!"
-                    //this.registerbutton_loading=false
-                    this.captcharun=true
+                    this.captcha =  await new Promise(resolve => this.captcharun=resolve);
+                    return await this.register()
                     return
+                }else if(jsondata.code==155795){
+                    this.captcha_needed=false
+                    this.error="Please re-do the captcha!"
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    this.captcha_needed=true
+                    this.captcha =  await new Promise(resolve => this.captcharun=resolve);
+                    return await this.register()
                 }
                 this.error=`${jsondata.message} | Code ${jsondata.code}`
             }else{
                 var token=jsondata.token
                 localStorage.setItem("api-token", token)
+                refresh_token();
                 this.router.transitionTo('dashboard');
                 console.log("registered!")
             }
@@ -106,8 +144,9 @@ export default class RegisterModel extends Component {
     setcaptcha(token){
         this.captcha = token
         if(this.captcharun){
+            this.captcharun(token)
             this.captcharun=false
-            this.register()
+            //this.register()
         }
     }
 }

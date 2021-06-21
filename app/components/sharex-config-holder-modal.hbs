@@ -1,17 +1,42 @@
 {{yield}}
 {{#if this.error}}
-    {{polaris-banner text=this.error status="critical" icon="CircleAlertMajor"}}
+    <BsAlert @type="danger" @dismissible={{false}}>
+        <strong>ERROR: </strong>{{this.error}}
+    </BsAlert>
 {{/if}}
-{{polaris-text-field
-  label="Name"
-  placeholder="Enter a name for this config!"
-  value=""
-  error=this.name_error
-  onChange=(action "name_change")
-}}
-{{#polaris-button onClick=(action "make_config") loading=make_loading}}
-    Create Config!
-{{/polaris-button}}
-{{#each this.upload_tokens as |token|}}
-    <SharexConfigModal @metadata={{token}} @load_list={{this.load_list}} />
+<BsButton @type="primary" @onClick={{action (mut this.make_config_model_open) true}}>Create Config</BsButton>
+<h4>Current Configs</h4>
+<BsAccordion as |acc|>
+{{#each this.upload_tokens as |token index|}}
+    <acc.item @value={{index}} @title={{token.name}}>
+        <SharexConfigModal @metadata={{token}} @load_list={{this.load_list}} />
+    </acc.item>
+{{else}}
+    <p>You do not have any configs!</p>
 {{/each}}
+</BsAccordion>
+
+<BsModal
+  @open={{this.make_config_model_open}}
+  @onHidden={{action (mut this.make_config_model_open) false}} as |modal|
+>
+    <modal.header>
+        <h4 class="modal-title">
+            Create Config
+        </h4>
+    </modal.header>
+    <modal.body>
+        {{#if this.error}}
+            <BsAlert @type="danger" @dismissible={{false}}>
+                <strong>ERROR: </strong>{{this.error}}
+            </BsAlert>
+        {{/if}}
+    <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "make_config"}} as |form|>
+        <form.element @controlType="text" @label="Enter Configuration Name" @property="name" />
+    </BsForm>
+    </modal.body>
+    <modal.footer>
+        <BsButton @onClick={{action (mut this.make_config_model_open) false}}>Cancel</BsButton>
+        <BsButton @defaultText="Create" @pendingText="Creating Configuration..." @onClick={{action "make_config"}} @type="success"></BsButton>
+    </modal.footer>
+</BsModal>
