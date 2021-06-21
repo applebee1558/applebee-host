@@ -13,5 +13,5 @@
     Create Config!
 {{/polaris-button}}
 {{#each this.upload_tokens as |token|}}
-    <SharexConfigModal @metadata={{token}} />
+    <SharexConfigModal @metadata={{token}} @load_list={{this.load_list}} />
 {{/each}}

@@ -48,6 +48,7 @@ export default class SharexConfigModal extends Component {
             this.delete_success = "Successfully revoked this config!"
         }
         this.delete_loading=false
+        await this.args.load_list()
     }
     @action
     saveconfig(){

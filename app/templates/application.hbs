@@ -1,17 +1,28 @@
 {{page-title "applebee.host"}}
-<nav class="menu">
-    <LinkTo @route="index" class="menu-index">
-        <h1>applebee.host</h1>
-    </LinkTo>
-    <div class="links">
-        <LinkTo @route="login" class="menu-login">
-            Login
-        </LinkTo>
-        <LinkTo @route="register" class="menu-register">
-            Register
-        </LinkTo>
-    </div>
-</nav>
+<BsNavbar
+  @type="light"
+  @backgroundColor="light"
+  @collapsed={{true}}
+  @onCollapse={{action (mut collapsed) true}}
+  @onExpand={{action (mut collapsed) false}} as |navbar|>
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    {{#link-to "index" class="navbar-brand"}}applebee.host{{/link-to}}
+  </div>
+  <navbar.content>
+    <navbar.nav as |nav|>
+      <nav.item>
+        <nav.link-to @route="index">Home</nav.link-to>
+      </nav.item>
+      <nav.item>
+        <nav.link-to @route="login">Login</nav.link-to>
+      </nav.item>
+      <nav.item>
+        <nav.link-to @route="register">Register</nav.link-to>
+      </nav.item>
+    </navbar.nav>
+  </navbar.content>
+</BsNavbar>
 
 {{!-- The following component displays Ember's default welcome message. --}}
 {{!<WelcomePage />}}

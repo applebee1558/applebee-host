@@ -11,6 +11,7 @@ module.exports = function (defaults) {
     sassOptions: {
       implementation: nodeSass,
     },
+
     svgJar: {
       strategy: 'inline',
       inline: {
@@ -23,6 +24,11 @@ module.exports = function (defaults) {
         ],
       }
     },
+
+    'ember-bootstrap': {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

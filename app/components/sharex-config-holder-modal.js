@@ -11,6 +11,9 @@ export default class SharexConfigHolderModal extends Component {
     @tracked make_loading = false
     constructor(params){
         super(...arguments)
+        this.load_list
+    }
+    load_list = ()=>{
         runTask(this, async ()=>{
             const {json_data, status} = await make_request("GET", "/upload-tokens")
             if(status!=200){
@@ -34,8 +37,14 @@ export default class SharexConfigHolderModal extends Component {
         if(status!=201){
             this.error = `${json_data.message} | Code: ${json_data.code}`
         }else{
-            this.upload_tokens.push(json_data)
-            this.make_loading=false
+            //this.upload_tokens.push(json_data)
+            const newarray = [json_data]
+            this.upload_tokens.forEach(element=>{
+                newarray.push(element)
+            })
+            this.upload_tokens=newarray
+            //window.location.reload()
         }
+        this.make_loading=false
     }
 }

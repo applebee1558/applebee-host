@@ -2,8 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { API_URL } from '../libs/config';
+import { inject as service } from '@ember/service';
 
 export default class RegisterModel extends Component {
+    @service router
     @tracked registerbutton_loading=false
     @tracked error=false
     email_addr=""
@@ -57,6 +59,7 @@ export default class RegisterModel extends Component {
             }else{
                 var token=jsondata.token
                 localStorage.setItem("api-token", token)
+                this.router.transitionTo('dashboard');
                 console.log("registered!")
             }
         }catch(error){
